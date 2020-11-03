@@ -8,16 +8,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WordsFrequency {
-    private String[] wordsArray;
+    private Stream<String> wordsArray;
 
     public WordsFrequency(String[] wordsArray) {
-        this.wordsArray = wordsArray;
+        this.wordsArray = Arrays.stream(wordsArray);
     }
 
     public void showWordFrequency () {
-        Stream<String> streamFromArray = Arrays.stream(this.wordsArray);
-
-        streamFromArray
+        this.wordsArray
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .entrySet()
                 .stream()
@@ -26,5 +24,4 @@ public class WordsFrequency {
                 .limit(5)
                 .forEach((element) -> System.out.println(element.getKey() + ", frequency: " + element.getValue()));
     }
-
 }
